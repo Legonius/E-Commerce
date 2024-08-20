@@ -9,10 +9,12 @@ import Orders from "./Pages/Orders";
 import PlaceOrder from "./Pages/PlaceOrder";
 import Product from "./Pages/Product";
 import Home from "./Pages/Home";
+import Navbar from "./Components/Navbar";
 
 const App = () => {
   return (
-    <div className="">
+    <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
