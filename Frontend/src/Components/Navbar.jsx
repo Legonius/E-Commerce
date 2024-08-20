@@ -5,7 +5,7 @@ import { NavLink, Link } from "react-router-dom";
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   return (
-    <div className="w-screen py-4 flex justify-between items-center">
+    <div className="max-w-full  py-4 flex justify-between items-center">
       <div>
         <img className="h-10" src={assets.logo} />
       </div>
@@ -58,17 +58,17 @@ const Navbar = () => {
       {/* {menu collapse slider} */}
       <div
         className={`${
-          menu ? "w-full" : "w-0"
-        } text-slate-700 absolute top-0 right-0 bottom-0 bg-black  px-5 py-2 sm:hidden overflow-hidden`}
+          menu ? "w-screen" : " translate-x-[100vw]"
+        } bg-white absolute top-0 right-0 transition-all`}
       >
         <div
           onClick={(e) => setMenu(false)}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 m-4"
         >
-          <img className="h-4" src={assets.cross_icon} />
+          <img className="h-4 rotate-180" src={assets.dropdown_icon} />
           <span className="text-lg">Back</span>
         </div>
-        <div className="mt-5 flex flex-col gap-4">
+        <div className="mt-5 ml-4 flex flex-col gap-4">
           <Link onClick={(e) => setMenu(false)} to={"/"} className=" text-lg">
             HOME
           </Link>
