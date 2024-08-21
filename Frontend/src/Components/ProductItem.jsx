@@ -12,7 +12,7 @@ const ProductItem = ({ item }) => {
       className="text-slate-500 flex flex-col overflow-hidden"
     >
       <img
-        className="hover:scale-110 transition ease-in-out"
+        className="sm:hover:scale-110 transition ease-in-out"
         src={image[0]}
         alt="Image"
       />

@@ -11,6 +11,7 @@ import Product from "./Pages/Product";
 import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import FourOFour from "./Pages/FourOFour";
+import Footer from "./Components/Footer";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/product" element={<Product />} />
         <Route path="*" element={<FourOFour />} />
       </Routes>
+      <Footer />
     </div>
   );
 };

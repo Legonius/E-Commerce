@@ -2,7 +2,7 @@ import React from "react";
 
 const NewsletterBox = () => {
   return (
-    <div className="flex flex-col justify-center items-center text-slate-400 gap-4 mt-10 mb-10">
+    <div className="flex flex-col justify-center items-center text-slate-400 gap-10 mt-10 mb-10">
       <p className="text-xl sm:text-2xl text-slate-700 font-bold">
         Subscripe now & get 20% off
       </p>
