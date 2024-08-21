@@ -6,9 +6,9 @@ const Navbar = () => {
   const [menu, setMenu] = useState(false);
   return (
     <div className="max-w-full  py-4 flex justify-between items-center">
-      <div>
+      <Link to={"/"}>
         <img className="h-10" src={assets.logo} />
-      </div>
+      </Link>
       <ul className="hidden sm:flex items-center gap-4">
         <NavLink to={"/"} className={"flex flex-col items-center"}>
           <p>HOME</p>
@@ -63,39 +63,43 @@ const Navbar = () => {
       >
         <div
           onClick={(e) => setMenu(false)}
-          className="flex items-center gap-2 m-4"
+          className="flex items-center gap-2 m-4 cursor-pointer"
         >
           <img className="h-4 rotate-180" src={assets.dropdown_icon} />
           <span className="text-lg">Back</span>
         </div>
         <div className="mt-5 ml-4 flex flex-col gap-4">
-          <Link onClick={(e) => setMenu(false)} to={"/"} className=" text-lg">
+          <NavLink
+            onClick={(e) => setMenu(false)}
+            to={"/"}
+            className=" text-lg p-3 rounded w-[90%]"
+          >
             HOME
-          </Link>
+          </NavLink>
           <hr className="bg-slate-400" />
-          <Link
+          <NavLink
             onClick={(e) => setMenu(false)}
             to={"/collection"}
-            className=" text-lg"
+            className=" text-lg p-3 rounded w-[90%]"
           >
             COLLECTION
-          </Link>
+          </NavLink>
           <hr className="bg-slate-400" />
-          <Link
+          <NavLink
             onClick={(e) => setMenu(false)}
             to={"/about"}
-            className=" text-lg"
+            className=" text-lg p-3 rounded w-[90%]"
           >
             ABOUT
-          </Link>
+          </NavLink>
           <hr className="bg-slate-400" />
-          <Link
+          <NavLink
             onClick={(e) => setMenu(false)}
             to={"/contact"}
-            className=" text-lg"
+            className=" text-lg p-3 rounded w-[90%]"
           >
             CONTACT
-          </Link>
+          </NavLink>
         </div>
       </div>
     </div>
