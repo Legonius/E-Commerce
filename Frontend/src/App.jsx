@@ -10,6 +10,7 @@ import PlaceOrder from "./Pages/PlaceOrder";
 import Product from "./Pages/Product";
 import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
+import FourOFour from "./Pages/FourOFour";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/orders" element={<Orders />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/product" element={<Product />} />
+        <Route path="*" element={<FourOFour />} />
       </Routes>
     </div>
   );

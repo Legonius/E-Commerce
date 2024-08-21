@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import { products } from "../assets/assets";
 
-const shopContext = createContext();
+export const shopContext = createContext();
 
 const ShopContextProvider = ({ children }) => {
   const currency = "$";
