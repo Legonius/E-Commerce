@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { shopContext } from "../Context/ShopContext";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
+  const { setShowSearch, showSearch } = useContext(shopContext);
+  const navigate = useNavigate();
+  const handleSearchIcon = () => {
+    setShowSearch(!showSearch);
+    navigate("/collection");
+  };
+
   return (
     <div className="max-w-full  py-4 flex justify-between items-center">
       <Link to={"/"}>
@@ -29,7 +37,11 @@ const Navbar = () => {
       </ul>
       <div className="flex gap-6">
         <div className="cursor-pointer">
-          <img className="h-6" src={assets.search_icon} />
+          <img
+            onClick={handleSearchIcon}
+            className="h-6"
+            src={assets.search_icon}
+          />
         </div>
 
         <div className="group  relative">
