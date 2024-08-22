@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
 import Collection from "./Pages/Collection";
@@ -15,6 +15,10 @@ import Footer from "./Components/Footer";
 import SearchBar from "./Components/SearchBar";
 
 const App = () => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
   return (
     <div className="min-h-screen relative overflow-x-hidden px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <Navbar />
