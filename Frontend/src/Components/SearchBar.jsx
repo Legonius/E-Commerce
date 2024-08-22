@@ -5,6 +5,10 @@ import { shopContext } from "../Context/ShopContext";
 const SearchBar = () => {
   const { showSearch, setShowSearch, searchProduct, setSearchProduct } =
     useContext(shopContext);
+  const closeSearchBar = () => {
+    setShowSearch(false);
+    setSearchProduct("");
+  };
 
   return (
     <div
@@ -23,7 +27,7 @@ const SearchBar = () => {
         <img className="h-5 cursor-pointer" src={assets.search_icon} />
       </div>
       <img
-        onClick={() => setShowSearch(false)}
+        onClick={closeSearchBar}
         className="h-4 cursor-pointer"
         src={assets.cross_icon}
       />
