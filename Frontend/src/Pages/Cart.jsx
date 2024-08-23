@@ -4,11 +4,14 @@ import Title from "../Components/Title";
 import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import CartTotal from "../Components/CartTotal";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems, products, currency, updateQuantity } =
     useContext(shopContext);
   const [allItems, setAllItems] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     let tempData = [];
     for (const items in cartItems) {
@@ -85,7 +88,19 @@ const Cart = () => {
           })}
         </div>
       </div>
-      <CartTotal />
+      <div className="w-full flex flex-col  sm:items-end">
+        <div className="w-2/3 sm:w-1/2 md:w-2/5 ">
+          <CartTotal />
+        </div>
+        <div className=" mt-6">
+          <button
+            onClick={() => navigate("/place-order")}
+            className="cursor-pointer px-4 py-3 text-sm text-white bg-black"
+          >
+            PROCEED TO CHECKOUT
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,9 +1,13 @@
 import React from "react";
 
-const Title = ({ text1, text2 }) => {
+const Title = ({ text1, text2, font }) => {
   return (
     <div className="flex items-center gap-2">
-      <h1 className="text-lg text-slate-500 sm:text-xl md:text-2xl">
+      <h1
+        className={`text-lg text-slate-500 ${
+          font === "small" ? "sm:text-base" : "sm:text-xl"
+        }  ${font === "small" ? "md:text-lg" : "md:text-2xl"}`}
+      >
         {text1}
         <span className="font-bold text-black ml-1">{text2}</span>
       </h1>
