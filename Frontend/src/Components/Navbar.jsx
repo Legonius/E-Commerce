@@ -47,8 +47,12 @@ const Navbar = () => {
         <div className="group  relative">
           <img className="h-6 cursor-pointer" src={assets.profile_icon} />
           <div className="group-hover:flex  flex-col gap-4 hidden w-32 text-slate-600 bg-slate-100 px-5 py-3 rounded-lg absolute right-[-10px] top-[20px]">
-            <p className="hover:text-black cursor-pointer">My Profile</p>
-            <p className="hover:text-black cursor-pointer">Orders</p>
+            <Link to={"/login"} className="hover:text-black cursor-pointer">
+              My Profile
+            </Link>
+            <Link to={"/orders"} className="hover:text-black cursor-pointer">
+              Orders
+            </Link>
             <p className="hover:text-black cursor-pointer">Logout</p>
           </div>
         </div>

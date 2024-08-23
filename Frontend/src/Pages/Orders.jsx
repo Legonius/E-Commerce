@@ -33,7 +33,7 @@ const Orders = () => {
                 <p>Ready to ship</p>
               </div>
               <div className="flex items-center justify-end ">
-                <button className="py-2 px-4 border-2 rounded-lg hover:bg-gray-200 hover:text-green-400 hover:border-green-400">
+                <button className="py-2 px-4 border-2 rounded-lg hover:text-green-400 hover:border-green-400">
                   Track Order
                 </button>
               </div>
