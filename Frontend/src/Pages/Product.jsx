@@ -70,7 +70,7 @@ const Product = () => {
                 onClick={() => setSize(sizee)}
                 className={`${
                   size === sizee ? "selected" : ""
-                } bg-slate-100 rounded-lg text-lg md:text-2xl w-10 h-10 flex justify-center items-center cursor-pointer`}
+                } bg-slate-100 rounded-lg text-base md:text-xl w-10 h-10 flex justify-center items-center cursor-pointer p-1`}
               >
                 {sizee}
               </span>
