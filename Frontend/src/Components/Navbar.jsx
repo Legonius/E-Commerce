@@ -55,9 +55,12 @@ const Navbar = () => {
 
         <div className="relative cursor-pointer">
           <img className="h-6" src={assets.cart_icon} />
-          <div className="bg-red-500 flex justify-center items-center w-5 h-5 text-xs  rounded-full text-slate-50 absolute right-[-5px]  bottom-[-5px]">
+          <Link
+            to={"/cart"}
+            className="bg-red-500 flex justify-center items-center w-5 h-5 text-xs  rounded-full text-slate-50 absolute right-[-5px]  bottom-[-5px]"
+          >
             {getCartCount()}
-          </div>
+          </Link>
         </div>
 
         <div
