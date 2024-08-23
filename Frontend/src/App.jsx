@@ -13,6 +13,8 @@ import Navbar from "./Components/Navbar";
 import FourOFour from "./Pages/FourOFour";
 import Footer from "./Components/Footer";
 import SearchBar from "./Components/SearchBar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const location = useLocation();
@@ -36,6 +38,7 @@ const App = () => {
         <Route path="*" element={<FourOFour />} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

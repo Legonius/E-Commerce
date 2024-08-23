@@ -8,7 +8,7 @@ import RelatedProducts from "../Components/RelatedProducts";
 const Product = () => {
   const { productId } = useParams();
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const { products, currency } = useContext(shopContext);
+  const { products, currency, addToCart } = useContext(shopContext);
   const [image, setImage] = useState([]);
   const [size, setSize] = useState("");
 
@@ -25,7 +25,6 @@ const Product = () => {
   useEffect(() => {
     setImage(selectedProduct?.image[0]);
   }, [selectedProduct]);
-
   return selectedProduct ? (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-10 sm:flex-row sm:gap-8">
@@ -35,7 +34,7 @@ const Product = () => {
           <div className="w-1/5 flex flex-col justify-between gap-1 overflow-x-auto overflow-y-scroll">
             {selectedProduct.image.map((image, index) => (
               <img
-                className="cursor-pointer"
+                className="cursor-pointer shrink-0"
                 onClick={() => setImage(image)}
                 key={index}
                 src={image}
@@ -65,17 +64,22 @@ const Product = () => {
           <p className="text-gray-400">{selectedProduct.description}</p>
           <p className="text-slate-600 ">Select Size</p>
           <div className="flex gap-2">
-            {selectedProduct.sizes.map((size, index) => (
+            {selectedProduct.sizes.map((sizee, index) => (
               <span
                 key={index}
-                onClick={() => setSize(size)}
-                className="bg-slate-200 text-lg md:text-2xl w-10 h-10 flex justify-center items-center cursor-pointer"
+                onClick={() => setSize(sizee)}
+                className={`${
+                  size === sizee ? "selected" : ""
+                } bg-slate-100 rounded-lg text-lg md:text-2xl w-10 h-10 flex justify-center items-center cursor-pointer`}
               >
-                {size}
+                {sizee}
               </span>
             ))}
           </div>
-          <button className="py-4 px-6 bg-black text-white w-40 md:w-60">
+          <button
+            onClick={() => addToCart(selectedProduct._id, size)}
+            className="py-4 px-6 active:bg-slate-600  bg-black text-white w-40 md:w-60"
+          >
             ADD TO CART
           </button>
           <div className="text-gray-400">

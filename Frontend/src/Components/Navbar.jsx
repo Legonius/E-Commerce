@@ -5,7 +5,7 @@ import { shopContext } from "../Context/ShopContext";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
-  const { setShowSearch, showSearch } = useContext(shopContext);
+  const { setShowSearch, showSearch, getCartCount } = useContext(shopContext);
   const navigate = useNavigate();
   const handleSearchIcon = () => {
     setShowSearch(!showSearch);
@@ -56,7 +56,7 @@ const Navbar = () => {
         <div className="relative cursor-pointer">
           <img className="h-6" src={assets.cart_icon} />
           <div className="bg-red-500 flex justify-center items-center w-5 h-5 text-xs  rounded-full text-slate-50 absolute right-[-5px]  bottom-[-5px]">
-            10
+            {getCartCount()}
           </div>
         </div>
 

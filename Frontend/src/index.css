@@ -23,7 +23,9 @@ a.active hr {
 ::-webkit-scrollbar {
   display: none;
 }
-
+.selected {
+  border: 2px solid orange;
+}
 @media screen and (max-width: 639px) {
   a.active {
     background-color: black;
