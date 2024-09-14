@@ -100,8 +100,8 @@ const Collection = () => {
                 className="mr-1 w-4 "
                 type="checkbox"
                 value={"Men"}
-              />{" "}
-              Men
+              />
+              {"Men"}
             </label>
             <label className="flex gap-3">
               <input
@@ -109,8 +109,8 @@ const Collection = () => {
                 className="mr-1 w-4 "
                 type="checkbox"
                 value={"Women"}
-              />{" "}
-              Women
+              />
+              {"Women"}
             </label>
             <label className="flex gap-3">
               <input
@@ -118,8 +118,8 @@ const Collection = () => {
                 className="mr-1 w-4 "
                 type="checkbox"
                 value={"Kids"}
-              />{" "}
-              Kids
+              />
+              {"Kids"}
             </label>
           </ul>
         </div>
