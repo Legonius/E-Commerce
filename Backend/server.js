@@ -15,7 +15,7 @@ app.use(urlencoded({ extended: false }));
 app.use(cors());
 
 //Routes
-app.use("api/user", userRouter);
+app.use("/api/user", userRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is Running");

@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import express from "express";
 import {
   adminLogin,
   loginUser,
   registerUser,
-} from "../controllers/userController";
+} from "../controllers/userController.js";
 
-const userRouter = mongoose.Route();
+const userRouter = express.Router();
 
 userRouter.post("/user-login", loginUser);
 userRouter.post("/register", registerUser);
