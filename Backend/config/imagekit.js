@@ -8,4 +8,16 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT, // URL endpoint
 });
 
-export default imagekit;
+const uploadImage = async (imagePath, imageName) => {
+  try {
+    const result = await imagekit.upload({
+      file: imagePath, // Image path or base64 string
+      fileName: imageName, // File name for the uploaded image
+    });
+    return result.url;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+  }
+};
+
+export default uploadImage;

@@ -4,6 +4,7 @@ import { connectDB } from "./config/mongodb.js";
 import cors from "cors";
 import imagekit from "./config/imagekit.js";
 import userRouter from "./routes/userRoute.js";
+import productRouter from "./routes/productRoute.js";
 
 const app = express();
 const uri = process.env.MONGO_DATA_URI;
@@ -16,6 +17,7 @@ app.use(cors());
 
 //Routes
 app.use("/api/user", userRouter);
+app.use("/api/product", productRouter);
 
 app.get("/", (req, res) => {
   res.send("Server is Running");

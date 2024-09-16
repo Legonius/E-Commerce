@@ -5,7 +5,6 @@ import bcryptjs from "bcryptjs";
 import "dotenv/config";
 
 //Make token
-
 const makeToken = (id) => {
   const token = jwt.sign({ id }, process.env.JWT_SECRET);
   return token;
