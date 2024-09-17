@@ -83,16 +83,20 @@ const registerUser = async (req, res) => {
 // controller for admin login
 const adminLogin = async (req, res) => {
   const { email, password } = req.body;
-  if (
-    email === process.env.ADMIN_EMAIL &&
-    password === process.env.ADMIN_PASSWORD
-  ) {
-    const token = jwt.sign(email + password, process.env.JWT_SECRET);
-    return res.status(202).json({ success: true, token });
+  try {
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign(email + password, process.env.JWT_SECRET);
+      return res.status(202).json({ success: true, token });
+    }
+    res
+      .status(403)
+      .json({ success: false, message: "Not Authorize, login again" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
-  res
-    .status(403)
-    .json({ success: false, message: "Not Authorize, login again" });
 };
 
 export { loginUser, registerUser, adminLogin };
