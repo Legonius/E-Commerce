@@ -1,5 +1,6 @@
 import "dotenv/config.js";
 import ImageKit from "imagekit";
+import fs from "fs";
 
 // Initialize ImageKit with API keys
 const imagekit = new ImageKit({
@@ -11,9 +12,12 @@ const imagekit = new ImageKit({
 const uploadImage = async (imagePath, imageName) => {
   try {
     const result = await imagekit.upload({
-      file: imagePath, // Image path or base64 string
-      fileName: imageName, // File name for the uploaded image
+      file: fs.readFileSync(imagePath),
+      fileName: imageName,
     });
+
+    fs.unlinkSync(imagePath);
+
     return result.url;
   } catch (error) {
     console.error("Error uploading image:", error);
