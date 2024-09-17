@@ -17,11 +17,19 @@ const uploadImage = async (imagePath, imageName) => {
     });
 
     fs.unlinkSync(imagePath);
-
-    return result.url;
+    return { fileId: result.fileId, url: result.url };
   } catch (error) {
     console.error("Error uploading image:", error);
   }
 };
 
-export default uploadImage;
+const deleteImage = async (fileId) => {
+  try {
+    const result = await imagekit.deleteFile(fileId);
+    console.log("Image deleted successfully:", result);
+  } catch (error) {
+    console.error("Error deleting image:", error);
+  }
+};
+
+export { uploadImage, deleteImage };

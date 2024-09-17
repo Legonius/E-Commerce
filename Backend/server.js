@@ -2,7 +2,6 @@ import express, { json, urlencoded } from "express";
 import "dotenv/config.js";
 import { connectDB } from "./config/mongodb.js";
 import cors from "cors";
-import imagekit from "./config/imagekit.js";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 

@@ -1,4 +1,4 @@
-import uploadImage from "../config/imagekit.js";
+import { uploadImage, deleteImage } from "../config/imagekit.js";
 import productModel from "../models/productModel.js";
 
 // Adding a product
@@ -45,11 +45,62 @@ const addProduct = async (req, res) => {
 };
 
 // Remove a Product
-const removeProduct = async (req, res) => {};
+const removeProduct = async (req, res) => {
+  const { id } = req.body;
+  try {
+    // const product = await productModel.findById(id);
+    // if (!product) {
+    //   return res
+    //     .status(404)
+    //     .json({ success: false, message: "Wrong Credential" });
+    // }
+    // console.log(product.image);
+    // await deleteImage(product.image[3].url);
+
+    const delProduct = await productModel.findByIdAndDelete(id);
+    if (!delProduct) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Wrong Credential" });
+    }
+    res
+      .status(202)
+      .json({ success: true, message: "Product removed successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 // Find a Product
-const oneProduct = async (req, res) => {};
+const oneProduct = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const findProduct = await productModel.findById(id);
+    if (!findProduct) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Wrong Credential" });
+    }
+    res.status(202).json({ success: true, message: findProduct });
+  } catch (error) {
+    console.log("err:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 // Get Product List
-const productList = async (req, res) => {};
+const productList = async (req, res) => {
+  try {
+    const findProductList = await productModel.find({});
+    if (!findProductList) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Wrong Credential" });
+    }
+    res.status(202).json({ success: true, message: findProductList });
+  } catch (error) {
+    console.log("err:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 export { addProduct, removeProduct, oneProduct, productList };
