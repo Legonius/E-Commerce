@@ -3,7 +3,7 @@ import { assets } from "../assets/assets.js";
 
 const Sidebars = () => {
   return (
-    <div className="w-[18%] h-full border-r-2 flex flex-col gap-4 pt-7">
+    <div className="w-[18%]  border-r-2 flex flex-col gap-4 pt-7">
       <NavLink
         to={"/"}
         className="flex justify-center sm:justify-start sm:gap-1 md:gap3 gap-3 items-center p-3 sm:pr-0 border-2 border-r-0 rounded"

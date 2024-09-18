@@ -13,7 +13,7 @@ const Navbar = ({ setToken }) => {
       <img className="max-w-[max(10%,85px)]" src={assets.logo} alt="logo" />
       <button
         onClick={handleLogout}
-        className="min-w-[max(10%,80px)] text-xs md:text-base bg-gray-700 text-white text-center  py-2 rounded-full"
+        className="min-w-[max(10%,80px)] text-xs md:text-base bg-gray-600 text-white text-center  py-2 rounded-full"
       >
         Logout
       </button>
