@@ -10,7 +10,7 @@ const adminAuth = async (req, res, next) => {
         return next();
       }
     }
-    res
+    return res
       .status(403)
       .json({ success: false, message: "Not Authorize, login again" });
   } catch (error) {
