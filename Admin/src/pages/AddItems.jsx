@@ -30,6 +30,7 @@ const AddItems = ({ token }) => {
     if (sizes.length <= 0) {
       return toast.warn("Atleast one size is require");
     }
+
     btn.current.disabled = true; // button disable to prevent repeatble click
     const formData = new FormData();
 
