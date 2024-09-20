@@ -29,15 +29,22 @@ const ListItems = ({ token }) => {
         All Products List
       </p>
       <div className="w-full  min-w-[20rem] overflow-x-scroll">
-        <div className=" py-2 grid grid-cols-[minmax(100px,_1fr)_minmax(300px,_3fr)_minmax(100px,_1fr)_minmax(100px,_1fr)_minmax(100px,_1fr)]  font-semibold border-0 bg-none md:bg-slate-100  md:border-2">
-          <span className="px-2">Image</span>
-          <span className="px-2">Name</span>
-          <span className="px-2">Category</span>
-          <span className="px-2">Price</span>
-          <span className="px-2 text-center">Delete</span>
+        <div className=" py-2 px-2 grid grid-cols-[minmax(100px,_1fr)_minmax(300px,_3fr)_minmax(100px,_1fr)_minmax(100px,_1fr)_minmax(100px,_1fr)]  font-semibold border-0 bg-none md:bg-slate-100  md:border-2">
+          <span>Image</span>
+          <span>Name</span>
+          <span>Category</span>
+          <span>Price</span>
+          <span className=" text-center">Delete</span>
         </div>
         {products.map((item) => {
-          return <Products key={item._id} item={item} token={token} />;
+          return (
+            <Products
+              key={item._id}
+              item={item}
+              token={token}
+              setProducts={setProducts}
+            />
+          );
         })}
       </div>
     </div>

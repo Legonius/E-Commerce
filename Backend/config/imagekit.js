@@ -23,10 +23,14 @@ const uploadImage = async (imagePath, imageName) => {
   }
 };
 
-const deleteImage = async (fileId) => {
+const deleteImage = async (imgArray) => {
   try {
-    const result = await imagekit.deleteFile(fileId);
-    console.log("Image deleted successfully:", result);
+    for (let i = 0; i < imgArray.length; i++) {
+      let fileId = imgArray[i];
+      if (fileId) {
+        const result = await imagekit.deleteFile(fileId);
+      }
+    }
   } catch (error) {
     console.error("Error deleting image:", error);
   }

@@ -46,16 +46,10 @@ const addProduct = async (req, res) => {
 
 // Remove a Product
 const removeProduct = async (req, res) => {
-  const { id } = req.body;
+  const { id, images } = req.body;
+  console.log(images);
   try {
-    // const product = await productModel.findById(id);
-    // if (!product) {
-    //   return res
-    //     .status(404)
-    //     .json({ success: false, message: "Wrong Credential" });
-    // }
-    // console.log(product.image);
-    // await deleteImage(product.image[3].url);
+    await deleteImage(images);
 
     const delProduct = await productModel.findByIdAndDelete(id);
     if (!delProduct) {
