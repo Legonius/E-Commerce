@@ -5,7 +5,6 @@ import productModel from "../models/productModel.js";
 const addProduct = async (req, res) => {
   const { name, description, price, sizes, bestseller, category, subCategory } =
     req.body;
-
   const image1 = req.files?.image1 && req.files.image1[0];
   const image2 = req.files?.image2 && req.files.image2[0];
   const image3 = req.files?.image3 && req.files.image3[0];
@@ -15,13 +14,22 @@ const addProduct = async (req, res) => {
     (item) => item !== undefined
   );
   try {
+    if (!images[0]) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Minimum One Image is Required" });
+    }
     const imageUrl = await Promise.all(
       images.map(async (img) => {
         let result = await uploadImage(img.path, img.originalname);
         return result;
       })
     );
-
+    if (!imageUrl[0]) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Image Upload Fail! try again." });
+    }
     const newProduct = await new productModel({
       name,
       description,
@@ -47,7 +55,6 @@ const addProduct = async (req, res) => {
 // Remove a Product
 const removeProduct = async (req, res) => {
   const { id, images } = req.body;
-  console.log(images);
   try {
     await deleteImage(images);
 
@@ -97,4 +104,5 @@ const productList = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 export { addProduct, removeProduct, oneProduct, productList };

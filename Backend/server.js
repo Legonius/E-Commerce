@@ -6,7 +6,7 @@ import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 
 const app = express();
-const uri = process.env.MONGO_DATA_URI;
+const uri = process.env.MONGO_DATA_URI1;
 const port = Number(process.env.PORT) || 15000;
 
 connectDB(uri);

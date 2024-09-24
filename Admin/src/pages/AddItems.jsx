@@ -1,13 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import { assets } from "../assets/assets";
 import axios from "axios";
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
+import { assets } from "../assets/assets";
 
 const AddItems = ({ token }) => {
+  //Bulky upload products manually
+
+  // useEffect(() => {
+  //   const { uploadProductObject, arrayProducts } = useBulkUpload();
+  //   uploadProductObject(products[1]); //manual upload a product in object
+  //   arrayProducts(products);// manual upload all products in array
+  // }, []);
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(25);
+  const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("Men");
   const [subCategory, setSubCategory] = useState("Winterwear");
   const [sizes, setSizes] = useState([]);
@@ -24,11 +32,14 @@ const AddItems = ({ token }) => {
     e.preventDefault();
 
     // check all blank fields
-    if (!image1 && !image2 && !image3 && !image4) {
-      return toast.warn("Atleast one image is require");
+    if (!image1) {
+      return toast.warn("First image is require minimum");
     }
     if (sizes.length <= 0) {
       return toast.warn("Atleast one size is require");
+    }
+    if (price <= 0) {
+      return toast.warn("Price should be set!");
     }
 
     btn.current.disabled = true; // button disable to prevent repeatble click
@@ -50,6 +61,8 @@ const AddItems = ({ token }) => {
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
 
+      console.log("form:", formData);
+
       const add = await axios.post(
         backendUrl + "/api/product/add-product",
         formData,
@@ -61,7 +74,7 @@ const AddItems = ({ token }) => {
 
         setName("");
         setDescription("");
-        setPrice(25);
+        setPrice(0);
         setBestseller(false);
         setCategory("Men");
         setSubCategory("Topwer");
@@ -78,7 +91,7 @@ const AddItems = ({ token }) => {
       btn.current.disabled = false; //button enable
     } catch (error) {
       toast.error(error.message);
-      btn.current.disabled = true;
+      btn.current.disabled = false;
     }
   };
 
@@ -200,6 +213,7 @@ const AddItems = ({ token }) => {
               type="number"
               className="text-slate-500 max-w-28 text-sm sm:text-base px-2 py-2 border-2 outline-none"
               value={price}
+              placeholder="25"
             />
           </div>
         </div>
