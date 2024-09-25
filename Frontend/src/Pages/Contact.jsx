@@ -8,7 +8,10 @@ const Contact = () => {
     <div className="mt-10 flex flex-col items-center gap-14 sm:gap-20">
       <Title text1={"CONTACT"} text2={"US"} />
       <div className="flex flex-col sm:flex-row justify-center items-center gap-10">
-        <img className="w-full sm:w-1/2" src={assets.contact_img} />
+        <img
+          className="w-full sm:w-1/2"
+          src="https://ik.imagekit.io/sj5gqfifxi/contact_img.png"
+        />
         <div className="w-full sm:w-auto flex flex-col gap-6">
           <h6 className="font-bold text-slate-700"> Our Store</h6>
           <div className="text-gray-400">

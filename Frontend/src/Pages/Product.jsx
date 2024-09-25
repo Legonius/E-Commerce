@@ -30,20 +30,22 @@ const Product = () => {
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-10 sm:flex-row sm:gap-8">
         {/*Product Images Display */}
-        <div className="flex flex-1 gap-1 flex-row">
-          {/* all small images */}
-          <div className="w-1/5 flex flex-col justify-between gap-1 overflow-x-auto overflow-y-scroll">
-            {selectedProduct.image.map((image, index) => (
-              <img
-                className="cursor-pointer shrink-0"
-                onClick={() => setImage(image)}
-                key={index}
-                src={image.url}
-              />
-            ))}
-          </div>
-          <div className="flex-1">
-            <img className="w-full h-auto" src={image} />
+        <div className=" flex-1 pt-4">
+          <div className="flex gap-1 flex-row">
+            {/* all small images */}
+            <div className="w-1/5 flex flex-col justify-between gap-1 overflow-x-auto overflow-y-scroll">
+              {selectedProduct.image.map((image, index) => (
+                <img
+                  className="cursor-pointer shrink-0"
+                  onClick={() => setImage(image.url)}
+                  key={index}
+                  src={image.url}
+                />
+              ))}
+            </div>
+            <div className="flex-1 border-2">
+              <img className="w-full h-full" src={image} />
+            </div>
           </div>
         </div>
         {/* ---------Description ----------- */}

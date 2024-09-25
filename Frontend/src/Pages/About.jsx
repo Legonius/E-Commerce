@@ -10,7 +10,11 @@ const About = () => {
         <Title text1={"ABOUT"} text2={"US"} />
         <div className="flex flex-col gap-4 sm:items-start sm:gap-10 sm:flex-row sm:justify-center items-center md:items-center">
           <div className="w-full sm:w-2/3 h-full">
-            <img className="w-full" src={assets.about_img} alt="about-img" />
+            <img
+              className="w-full"
+              src="https://ik.imagekit.io/sj5gqfifxi/about_img.png?updatedAt=1727249348592"
+              alt="about-img"
+            />
           </div>
           <div className="w-full flex flex-col gap-5">
             <p className="text-slate-500">
