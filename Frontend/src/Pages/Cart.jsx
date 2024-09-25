@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { shopContext } from "../Context/ShopContext";
 import Title from "../Components/Title";
 import { Link } from "react-router-dom";
-import { assets } from "../assets/assets";
+import { assets } from "../assets/assets.js";
 import CartTotal from "../Components/CartTotal";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const Cart = () => {
   const { cartItems, products, currency, updateQuantity } =
