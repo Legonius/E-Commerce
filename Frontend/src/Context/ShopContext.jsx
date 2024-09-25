@@ -21,11 +21,16 @@ const ShopContextProvider = ({ children }) => {
   const [searchProduct, setSearchProduct] = useState("");
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     getProducts(setProducts);
   }, []);
-
+  useEffect(() => {
+    if (!token && localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
   const addToCart = (id, size) => {
     let cartData = structuredClone(cartItems);
     if (!size) {
@@ -86,6 +91,8 @@ const ShopContextProvider = ({ children }) => {
     cartItems,
     updateQuantity,
     cartTotalAmount,
+    token,
+    setToken,
   };
   return <shopContext.Provider value={value}>{children}</shopContext.Provider>;
 };

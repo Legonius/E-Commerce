@@ -53,9 +53,7 @@ const registerUser = async (req, res) => {
       email: email,
     });
     if (exist) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User already exists." });
+      return res.json({ success: false, message: "User already exists." });
     }
     if (password.length < 8) {
       return res.status(400).json({

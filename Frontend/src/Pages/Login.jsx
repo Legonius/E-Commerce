@@ -1,9 +1,63 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { shopContext } from "../Context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [header, setHeader] = useState("Sign Up");
-  const submitHandler = (e) => {
+  const navigate = useNavigate();
+  const [header, setHeader] = useState("Login");
+  const { token, setToken } = useContext(shopContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
+    const url = import.meta.env.VITE_BACKENT_URL;
+
+    try {
+      if (header === "Sign Up") {
+        const response = await axios.post(`${url}/api/user/register`, {
+          name,
+          email,
+          password,
+        });
+        if (response.data.success) {
+          navigate("/");
+          toast.success("Account Created Successfully");
+          setToken(response.data.message);
+          localStorage.setItem("token", response.data.message);
+        } else {
+          toast.error(response.data.message);
+        }
+      } else {
+        const response = await axios.post(
+          `${url}/api/user/user-login`,
+          {
+            email,
+            password,
+          },
+          token
+        );
+        if (response.data.success) {
+          navigate("/");
+          toast.success("Login Successfully");
+          setToken(response.data.message);
+          localStorage.setItem("token", response.data.message);
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <div className="flex flex-col justify-center items-center gap-6 mt-10">
@@ -21,6 +75,8 @@ const Login = () => {
           ""
         ) : (
           <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             className={` px-3 py-2 h-10 border-2 outline-gray-900`}
             type="text"
             placeholder="Name"
@@ -29,12 +85,16 @@ const Login = () => {
         )}
 
         <input
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
           className="px-3 py-2 h-10 border-2 outline-gray-900 "
           type="email"
           placeholder="Email"
           required
         />
         <input
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
           className="px-3 py-2 h-10 border-2 outline-gray-900"
           type="password"
           placeholder="Password"
