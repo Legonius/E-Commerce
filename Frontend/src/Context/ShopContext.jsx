@@ -1,8 +1,18 @@
-import React, { createContext, useState } from "react";
-import { products } from "../assets/assets";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export const shopContext = createContext();
+
+const getProducts = async (setData) => {
+  let url = import.meta.env.VITE_BACKENT_URL;
+  let response = await axios.get(`${url}/api/product/list-product`);
+  if (response.data.success) {
+    setData(response.data.message);
+  } else {
+    toast.error(response.data.message);
+  }
+};
 
 const ShopContextProvider = ({ children }) => {
   const currency = "$";
@@ -10,6 +20,12 @@ const ShopContextProvider = ({ children }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchProduct, setSearchProduct] = useState("");
   const [cartItems, setCartItems] = useState({});
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts(setProducts);
+  }, []);
+
   const addToCart = (id, size) => {
     let cartData = structuredClone(cartItems);
     if (!size) {

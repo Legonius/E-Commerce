@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { assets } from "../assets/assets";
 import CartTotal from "../Components/CartTotal";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const { cartItems, products, currency, updateQuantity } =
@@ -27,13 +28,16 @@ const Cart = () => {
     }
     setAllItems(tempData);
   }, [cartItems]);
+
   return (
     <div className="mb-20">
       <div className="my-8">
         <Title text1={"YOUR"} text2={"CART"} />
         <div>
           {allItems.map((item, index) => {
-            let eachItemDetail = products.find((x) => x._id === item._id);
+            let eachItemDetail = products.find(
+              (eachItem) => eachItem._id === item._id
+            );
             return (
               <div key={index} className="w-full  flex gap-4  py-8 border-b-2">
                 <Link
@@ -42,7 +46,7 @@ const Cart = () => {
                 >
                   <img
                     className=" sm:h-20"
-                    src={eachItemDetail.image[0]}
+                    src={eachItemDetail.image[0].url}
                     alt="image"
                   />
                 </Link>

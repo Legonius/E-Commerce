@@ -14,7 +14,7 @@ const ProductItem = ({ item }) => {
       <div className="overflow-hidden">
         <img
           className="sm:hover:scale-110 transition ease-in-out"
-          src={image[0]}
+          src={image[0].url}
           alt="Image"
         />
       </div>

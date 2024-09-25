@@ -23,8 +23,9 @@ const Product = () => {
     fetchProduct();
   }, [productId, products]);
   useEffect(() => {
-    setImage(selectedProduct?.image[0]);
+    setImage(selectedProduct?.image[0].url);
   }, [selectedProduct]);
+
   return selectedProduct ? (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-10 sm:flex-row sm:gap-8">
@@ -37,7 +38,7 @@ const Product = () => {
                 className="cursor-pointer shrink-0"
                 onClick={() => setImage(image)}
                 key={index}
-                src={image}
+                src={image.url}
               />
             ))}
           </div>

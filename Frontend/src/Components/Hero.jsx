@@ -1,6 +1,4 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { assets } from "../assets/assets";
 
 const Hero = () => {
   return (
@@ -23,7 +21,10 @@ const Hero = () => {
       </div>
 
       <Link>
-        <img className="w-full" src={assets.hero_img} />
+        <img
+          className="w-full"
+          src={"https://ik.imagekit.io/sj5gqfifxi/hero_img.png"}
+        />
       </Link>
     </div>
   );

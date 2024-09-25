@@ -66,7 +66,7 @@ const Collection = () => {
   useEffect(() => {
     let copyProducts = products.slice();
     setFilteredProducts(copyProducts);
-  }, []);
+  }, [products]);
   useEffect(() => {
     filteringWithCategory();
   }, [categories, subCategories, searchProduct]);
