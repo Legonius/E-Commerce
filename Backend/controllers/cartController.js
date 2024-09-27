@@ -42,7 +42,7 @@ const addToCart = async (req, res) => {
 const updateCart = async (req, res) => {
   try {
     const { userId, itemId, size, quantity } = req.body;
-    if (!userId || !itemId || !size || !quantity) {
+    if (!userId || !itemId || !size || quantity === undefined) {
       return res
         .status(401)
         .json({ success: false, message: "Product details needed!" });

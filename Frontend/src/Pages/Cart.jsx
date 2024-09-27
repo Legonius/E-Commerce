@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { shopContext } from "../Context/ShopContext";
 import Title from "../Components/Title";
 import { Link } from "react-router-dom";

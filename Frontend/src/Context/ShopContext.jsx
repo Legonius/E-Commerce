@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+const backendURL = import.meta.env.VITE_BACKENT_URL;
 export const shopContext = createContext();
 
 const getProducts = async (setData) => {
@@ -29,9 +30,19 @@ const ShopContextProvider = ({ children }) => {
   useEffect(() => {
     if (!token && localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
+      getCart(localStorage.getItem("token"));
     }
+    getCartCount();
   }, []);
-  const addToCart = (id, size) => {
+
+  const getCart = async (string) => {
+    const cartData = await axios.get(`${backendURL}/api/cart/get-cart`, {
+      headers: { token: string },
+    });
+    console.log(cartData);
+    setCartItems(cartData.data.cartData);
+  };
+  const addToCart = async (id, size) => {
     let cartData = structuredClone(cartItems);
     if (!size) {
       toast.error("Please Select Size");
@@ -48,21 +59,32 @@ const ShopContextProvider = ({ children }) => {
       cartData[id][size] = 1;
     }
     setCartItems(cartData);
+    await axios.post(
+      `${backendURL}/api/cart/add-cart`,
+      { itemId: id, size },
+      { headers: { token } }
+    );
   };
   const getCartCount = () => {
     let totalCount = 0;
     for (let items in cartItems) {
       for (let item in cartItems[items]) {
-        totalCount += cartItems[items][item];
+        totalCount += Number(cartItems[items][item]);
       }
     }
     return totalCount;
   };
 
-  const updateQuantity = (id, size, quantity) => {
+  const updateQuantity = async (id, size, quantity) => {
+    let quantities = Number(quantity);
     const copyCart = structuredClone(cartItems);
     copyCart[id][size] = Number(quantity);
     setCartItems(copyCart);
+    await axios.patch(
+      `${backendURL}/api/cart/update-cart`,
+      { itemId: id, size, quantity: quantities },
+      { headers: { token } }
+    );
   };
 
   const cartTotalAmount = () => {
@@ -93,6 +115,7 @@ const ShopContextProvider = ({ children }) => {
     cartTotalAmount,
     token,
     setToken,
+    getCart,
   };
   return <shopContext.Provider value={value}>{children}</shopContext.Provider>;
 };
