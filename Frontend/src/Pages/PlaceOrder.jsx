@@ -32,36 +32,40 @@ const PlaceOrder = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let allItems = structuredClone(cartItems);
-    let itemsData = {};
-    for (let items in allItems) {
-      for (let item in allItems[items]) {
-        if (allItems[items][item] > 0) {
-          itemsData[items] = [item];
-          itemsData[items][item] = allItems[items][item];
+    try {
+      let allItems = structuredClone(cartItems);
+      let itemsData = {};
+      for (let items in allItems) {
+        for (let item in allItems[items]) {
+          if (allItems[items][item] > 0) {
+            itemsData[items] = [item];
+            itemsData[items][item] = allItems[items][item];
+          }
         }
       }
-    }
-    let amount = deliveryFee + cartTotalAmount();
-    let dataInfo = {
-      address: formData,
-      items: itemsData,
-      amount,
-    };
+      let amount = deliveryFee + cartTotalAmount();
+      let dataInfo = {
+        address: formData,
+        items: itemsData,
+        amount,
+      };
 
-    const placeOrder = await axios.post(
-      `${backendURL}/api/order/place`,
-      dataInfo,
-      {
-        headers: { token },
+      const placeOrder = await axios.post(
+        `${backendURL}/api/order/place`,
+        dataInfo,
+        {
+          headers: { token },
+        }
+      );
+      if (placeOrder.data.success) {
+        setCartItems({});
+        toast.success(placeOrder.data.message);
+        navigate("/orders");
+      } else {
+        toast.warn(placeOrder.data.message);
       }
-    );
-    if (placeOrder.data.success) {
-      setCartItems({});
-      toast.success(placeOrder.data.message);
-      navigate("/orders");
-    } else {
-      toast.warn(placeOrder.data.message);
+    } catch (error) {
+      toast.error(error.message);
     }
   };
   return (

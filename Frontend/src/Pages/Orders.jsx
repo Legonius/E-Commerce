@@ -15,7 +15,7 @@ const Orders = () => {
           >
             <div className="flex flex-shrink-0 flex-1 gap-2">
               <div>
-                <img className="w-20" src={item.image[0]} />
+                <img className="w-20" src={item.image[0].url} />
               </div>
               <div className="flex flex-col justify-between">
                 <p>{item.name}</p>
