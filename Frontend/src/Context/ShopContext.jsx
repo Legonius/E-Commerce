@@ -39,7 +39,6 @@ const ShopContextProvider = ({ children }) => {
     const cartData = await axios.get(`${backendURL}/api/cart/get-cart`, {
       headers: { token: string },
     });
-    console.log(cartData);
     setCartItems(cartData.data.cartData);
   };
   const addToCart = async (id, size) => {
@@ -93,7 +92,7 @@ const ShopContextProvider = ({ children }) => {
       let eachItem = products.find((x) => x._id === items);
       for (const item in cartItems[items]) {
         if (cartItems[items][item] > 0) {
-          totalAmount += eachItem.price * cartItems[items][item];
+          totalAmount += eachItem?.price * cartItems[items][item];
         }
       }
     }
@@ -111,6 +110,7 @@ const ShopContextProvider = ({ children }) => {
     addToCart,
     getCartCount,
     cartItems,
+    setCartItems,
     updateQuantity,
     cartTotalAmount,
     token,
