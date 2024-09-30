@@ -16,6 +16,7 @@ const PlaceOrder = () => {
     setCartItems,
     deliveryFee,
     token,
+    currency,
   } = useContext(shopContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -47,6 +48,7 @@ const PlaceOrder = () => {
           if (allItems[items][item] > 0) {
             product.size = [item];
             product.quantity = allItems[items][item];
+            product.currency = currency;
             itemsData.push(product);
           }
         }

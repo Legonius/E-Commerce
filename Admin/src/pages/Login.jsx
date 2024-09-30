@@ -18,7 +18,7 @@ const Login = ({ setToken }) => {
         toast.success("Login Successfully");
         setEmail("");
         setPassword("");
-        localStorage.setItem("token", submit.data.token);
+        localStorage.setItem("token-admin", submit.data.token);
       } else {
         toast.error("Wrong Credential");
       }

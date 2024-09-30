@@ -9,10 +9,9 @@ const placeOrder = async (req, res) => {
       userId: userId.id,
       items,
       amount,
-      address: JSON.stringify(address),
+      address: address,
       paymentMethod: "COD",
-      payment: "COD",
-      date: Date(),
+      date: Date.now(),
     });
     const orderSent = await orderModel.create(order);
     await orderSent.save();
@@ -42,7 +41,11 @@ const placeOrderRazorpay = async (req, res) => {
 //All orders data for Admin Panel
 const allOrders = async (req, res) => {
   try {
-  } catch (error) {}
+    const orders = await orderModel.find({});
+    res.status(200).json({ success: true, message: orders });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 // User Order Data for Frontend

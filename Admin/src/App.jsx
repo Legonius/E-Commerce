@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token-admin"));
   return (
     <div className="min-h-screen w-screen overflow-x-hidden px-2 md:px-8 lg:px-12 flex flex-col">
       {!token ? (
