@@ -9,8 +9,14 @@ import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
   const backendURL = import.meta.env.VITE_BACKENT_URL;
-  const { cartTotalAmount, cartItems, setCartItems, deliveryFee, token } =
-    useContext(shopContext);
+  const {
+    products,
+    cartTotalAmount,
+    cartItems,
+    setCartItems,
+    deliveryFee,
+    token,
+  } = useContext(shopContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -34,12 +40,14 @@ const PlaceOrder = () => {
     e.preventDefault();
     try {
       let allItems = structuredClone(cartItems);
-      let itemsData = {};
+      let itemsData = [];
       for (let items in allItems) {
         for (let item in allItems[items]) {
+          let product = products.find((itm) => items == itm._id);
           if (allItems[items][item] > 0) {
-            itemsData[items] = [item];
-            itemsData[items][item] = allItems[items][item];
+            product.size = [item];
+            product.quantity = allItems[items][item];
+            itemsData.push(product);
           }
         }
       }
@@ -49,7 +57,6 @@ const PlaceOrder = () => {
         items: itemsData,
         amount,
       };
-
       const placeOrder = await axios.post(
         `${backendURL}/api/order/place`,
         dataInfo,
