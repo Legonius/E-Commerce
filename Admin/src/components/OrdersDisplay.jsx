@@ -5,6 +5,7 @@ import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
 const OrdersDisplay = ({ data, token }) => {
+  console.log(data);
   const [status, setStatus] = useState(data.status || "Order Placed");
 
   const updateStatus = async (e) => {
@@ -32,7 +33,11 @@ const OrdersDisplay = ({ data, token }) => {
   };
 
   return (
-    <div className="flex justify-between flex-wrap border-2 p-4 hover:bg-slate-100">
+    <div
+      className={`flex justify-between flex-wrap border-2 p-4 ${
+        status === "Delivered" ? "hover:bg-green-300" : "hover:bg-slate-100"
+      } ${status === "Delivered" ? "bg-green-200" : ""}`}
+    >
       <div className="py-3">
         <img className="w-20 sm:w-30" src={assets.parcel_icon} alt="imge" />
         <p>
@@ -77,7 +82,7 @@ const OrdersDisplay = ({ data, token }) => {
         {data.items[0].currency}
         {data.amount}
       </div>
-      <div className="py-3">
+      <div className="py-3 flex flex-col gap-3 justify-between">
         <select
           onChange={(e) => updateStatus(e)}
           value={status}
@@ -89,6 +94,10 @@ const OrdersDisplay = ({ data, token }) => {
           <option value="Out for delivery">Out for delivery</option>
           <option value="Delivered">Delivered</option>
         </select>
+        <p>
+          Ordered Date:<br></br>{" "}
+          {new Date(Number(data.date)).toLocaleDateString()}{" "}
+        </p>
       </div>
     </div>
   );

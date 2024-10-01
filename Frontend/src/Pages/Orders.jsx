@@ -1,45 +1,49 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Title from "../Components/Title";
 import { shopContext } from "../Context/ShopContext";
+import axios from "axios";
+import OrdersDetails from "../Components/OrdersDetails";
 
 const Orders = () => {
-  const { currency, products } = useContext(shopContext);
+  const { currency, token } = useContext(shopContext);
+  const [tracked, setTracked] = useState(false);
+  const [myOrders, setMyOrders] = useState([]);
+  const getOrders = async () => {
+    if (!tracked) {
+      setTracked(true);
+      const backendURL = import.meta.env.VITE_BACKENT_URL;
+      const orders = await axios.get(`${backendURL}/api/order/user-ordered`, {
+        headers: { token: token },
+      });
+      if (orders.data.success) {
+        setMyOrders(orders.data.message);
+        setTimeout(() => {
+          setTracked(false);
+        }, 1500);
+      } else {
+        setTracked(false);
+      }
+    }
+  };
+  useEffect(() => {
+    getOrders();
+  }, []);
   return (
     <div className=" pt-10 border-t-2">
       <Title text1={"MY"} text2={"ORDERS"} />
       <div className="flex flex-col">
-        {products.slice(1, 4).map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-col gap-2 sm:gap-0 sm:flex-row sm:justify-between my-4 border-y py-2 items-center text-gray-500"
-          >
-            <div className="flex flex-shrink-0 flex-1 gap-2">
-              <div>
-                <img className="w-20" src={item.image[0].url} />
-              </div>
-              <div className="flex flex-col justify-between">
-                <p>{item.name}</p>
-                <p>
-                  {currency} {item.price} {"Quantity: 1"} {item.sizes[0]}
-                </p>
-                <p>Date: 25 Jul 2024</p>
-              </div>
-            </div>
-            <div className="flex w-full flex-1 justify-around sm:justify-between items-center ">
-              <div className="flex  gap-2 items-center justify-center">
-                <p
-                  className={`h-4 w-4 border-2 rounded-full  shrink-0 bg-green-500`}
-                ></p>
-                <p>Ready to ship</p>
-              </div>
-              <div className="flex items-center justify-end ">
-                <button className="py-2 px-4 border-2 rounded-lg hover:text-green-400 hover:border-green-400">
-                  Track Order
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+        {myOrders.length > 0 &&
+          myOrders.map((orders) =>
+            orders.items.map((item, index) => (
+              <OrdersDetails
+                key={orders._id + index}
+                item={item}
+                gO={getOrders}
+                currency={currency}
+                orders={orders}
+              />
+            ))
+          )}
       </div>
     </div>
   );
