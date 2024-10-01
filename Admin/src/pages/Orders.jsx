@@ -20,8 +20,8 @@ const Orders = ({ token }) => {
     <div className="w-full px-8 py-4">
       <h1 className="text-xl mb-8">Order Page</h1>
       <div className="flex flex-col gap-8 text-gray-600">
-        {allOrders.map((item, index) => (
-          <OrdersDisplay key={index} data={item} />
+        {allOrders?.map((item, index) => (
+          <OrdersDisplay key={index} data={item} token={token} />
         ))}
       </div>
     </div>

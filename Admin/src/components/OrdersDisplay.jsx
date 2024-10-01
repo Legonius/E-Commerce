@@ -1,7 +1,36 @@
+import { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
+import axios from "axios";
+import { backendUrl } from "../App";
+import { toast } from "react-toastify";
 
-const OrdersDisplay = ({ data }) => {
-  console.log(data);
+const OrdersDisplay = ({ data, token }) => {
+  const [status, setStatus] = useState(data.status || "Order Placed");
+
+  const updateStatus = async (e) => {
+    const oldValue = status;
+    const newValue = e.target.value;
+
+    setStatus(newValue);
+    if (newValue) {
+      try {
+        const update = await axios.patch(
+          `${backendUrl}/api/order/status`,
+          { id: data._id, status: newValue },
+          { headers: { token } }
+        );
+        if (update.data.success) {
+          toast.success("Status Updated");
+        } else {
+          setStatus(oldValue);
+        }
+      } catch (error) {
+        toast.error(error.message);
+        setStatus(oldValue);
+      }
+    }
+  };
+
   return (
     <div className="flex justify-between flex-wrap border-2 p-4 hover:bg-slate-100">
       <div className="py-3">
@@ -50,7 +79,8 @@ const OrdersDisplay = ({ data }) => {
       </div>
       <div className="py-3">
         <select
-          value={data.status}
+          onChange={(e) => updateStatus(e)}
+          value={status}
           className="px-3 py-2 border-2 font-semibold outline-none"
         >
           <option value="Order Placed">Order Placed</option>
