@@ -59,19 +59,48 @@ const PlaceOrder = () => {
         items: itemsData,
         amount,
       };
-      const placeOrder = await axios.post(
-        `${backendURL}/api/order/place`,
-        dataInfo,
-        {
-          headers: { token },
-        }
-      );
-      if (placeOrder.data.success) {
-        setCartItems({});
-        toast.success(placeOrder.data.message);
-        navigate("/orders");
-      } else {
-        toast.warn(placeOrder.data.message);
+      let placeOrder;
+      switch (paymentMethod) {
+        case "cod":
+          placeOrder = await axios.post(
+            `${backendURL}/api/order/place`,
+            dataInfo,
+            {
+              headers: { token },
+            }
+          );
+          if (placeOrder.data.success) {
+            setCartItems({});
+            toast.success(placeOrder.data.message);
+            navigate("/orders");
+          } else {
+            toast.warn(placeOrder.data.message);
+          }
+          break;
+        case "stripe":
+          placeOrder = await axios.post(
+            `${backendURL}/api/order/stripe`,
+            dataInfo,
+            {
+              headers: { token },
+            }
+          );
+          if (placeOrder.data.success) {
+            window.location.replace(placeOrder.data.session_url);
+          } else {
+            toast.error(placeOrder.data.message);
+          }
+          console.log(placeOrder);
+          break;
+        case "rzp":
+          placeOrder = await axios.post(
+            `${backendURL}/api/order/razorpay`,
+            dataInfo,
+            {
+              headers: { token },
+            }
+          );
+          break;
       }
     } catch (error) {
       toast.error(error.message);

@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 const authUser = async (req, res, next) => {
   try {
     let { token } = req.headers;
-
     if (!token) {
       return res.json({ success: false, message: "Login first" });
     }

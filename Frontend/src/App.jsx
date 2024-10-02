@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
@@ -13,8 +13,10 @@ import Navbar from "./Components/Navbar";
 import FourOFour from "./Pages/FourOFour";
 import Footer from "./Components/Footer";
 import SearchBar from "./Components/SearchBar";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Verify from "./Pages/Verify";
+import { shopContext } from "./Context/ShopContext";
 
 const App = () => {
   const location = useLocation();
@@ -22,7 +24,7 @@ const App = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
   return (
-    <div className="min-h-screen relative overflow-x-hidden px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+    <div className="flex flex-col justify-between min-h-screen relative overflow-x-hidden px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <Navbar />
       <SearchBar />
       <Routes>
@@ -35,10 +37,12 @@ const App = () => {
         <Route path="/orders" element={<Orders />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/product/:productId" element={<Product />} />
+        <Route path="/verify" element={<Verify />} />
         <Route path="*" element={<FourOFour />} />
       </Routes>
-      <Footer />
       <ToastContainer />
+
+      <Footer />
     </div>
   );
 };

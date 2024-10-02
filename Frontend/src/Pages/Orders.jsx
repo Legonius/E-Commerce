@@ -10,6 +10,7 @@ const Orders = () => {
   const [myOrders, setMyOrders] = useState([]);
   const getOrders = async () => {
     if (!tracked) {
+      if (!token) return null;
       setTracked(true);
       const backendURL = import.meta.env.VITE_BACKENT_URL;
       const orders = await axios.get(`${backendURL}/api/order/user-ordered`, {
@@ -27,7 +28,7 @@ const Orders = () => {
   };
   useEffect(() => {
     getOrders();
-  }, []);
+  }, [token]);
   return (
     <div className=" pt-10 border-t-2">
       <Title text1={"MY"} text2={"ORDERS"} />
