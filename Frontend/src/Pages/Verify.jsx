@@ -13,7 +13,6 @@ const Verify = () => {
   const orderId = searchParams.get("orderId");
 
   const payment = async () => {
-    console.log("token:", token);
     if (!token) return null;
     const paymentRediretToBackend = await axios.post(
       `${backendURL}/api/order/verify-payment`,
@@ -28,7 +27,6 @@ const Verify = () => {
       toast.error(paymentRediretToBackend.data.message);
       navigate("/cart");
     }
-    console.log(paymentRediretToBackend);
   };
 
   useEffect(() => {

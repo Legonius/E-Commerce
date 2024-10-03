@@ -61,8 +61,6 @@ const AddItems = ({ token }) => {
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
 
-      console.log("form:", formData);
-
       const add = await axios.post(
         backendUrl + "/api/product/add-product",
         formData,

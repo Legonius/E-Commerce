@@ -90,15 +90,17 @@ const PlaceOrder = () => {
           } else {
             toast.error(placeOrder.data.message);
           }
-          console.log(placeOrder);
           break;
         case "rzp":
-          placeOrder = await axios.post(
-            `${backendURL}/api/order/razorpay`,
-            dataInfo,
-            {
-              headers: { token },
-            }
+          // placeOrder = await axios.post(
+          //   `${backendURL}/api/order/razorpay`,
+          //   dataInfo,
+          //   {
+          //     headers: { token },
+          //   }
+          // );
+          toast.warn(
+            "We temporary stop Razorpay service.Please try other method."
           );
           break;
       }

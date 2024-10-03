@@ -5,7 +5,6 @@ import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
 const OrdersDisplay = ({ data, token }) => {
-  console.log(data);
   const [status, setStatus] = useState(data.status || "Order Placed");
 
   const updateStatus = async (e) => {

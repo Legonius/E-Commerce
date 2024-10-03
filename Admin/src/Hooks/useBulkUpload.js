@@ -57,11 +57,12 @@ const useBulkUpload = () => {
           { headers: { token } }
         );
 
-        if (add.data.success) {
-          console.log(add.data.message);
-        } else {
-          console.log("Unauthorized login again");
-        }
+        // debugging upload images
+        // if (add.data.success) {
+        //   console.log(add.data.message);
+        // } else {
+        //   console.log("Unauthorized login again");
+        // }
       } catch (error) {
         console.log("catch err:", error.message);
       }
