@@ -14,7 +14,15 @@ const port = process.env.PORT || 15000;
 connectDB(uri);
 app.use(json());
 app.use(urlencoded({ extended: false }));
-app.use(cors({ origin: "*" }));
+
+// Allow your frontend domain
+const corsOptions = {
+  origin: "https://e-commerce-frontend-tau-two.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 //Routes end points
 app.use("/api/user", userRouter);
