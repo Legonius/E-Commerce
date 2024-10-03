@@ -14,7 +14,7 @@ const port = process.env.PORT || 15000;
 connectDB(uri);
 app.use(json());
 app.use(urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 //Routes end points
 app.use("/api/user", userRouter);
