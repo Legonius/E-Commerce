@@ -7,7 +7,9 @@ export const shopContext = createContext();
 
 const getProducts = async (setData) => {
   let url = import.meta.env.VITE_BACKENT_URL;
+  console.log(url);
   let response = await axios.get(`${url}/api/product/list-product`);
+  console.log(response);
   if (response.data.success) {
     setData(response.data.message);
   } else {

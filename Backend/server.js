@@ -22,7 +22,7 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 //Routes end points
 app.use("/api/user", userRouter);
