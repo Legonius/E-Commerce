@@ -9,7 +9,7 @@ import orderRoute from "./routes/orderRoute.js";
 
 const app = express();
 const uri = process.env.MONGO_DATA_URI1;
-const port = Number(process.env.PORT) || 15000;
+const port = process.env.PORT || 15000;
 
 connectDB(uri);
 app.use(json());
