@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
+  const [loading, setLoading] = useState(false);
   const backendURL = import.meta.env.VITE_BACKENT_URL;
   const {
     products,
@@ -62,6 +63,7 @@ const PlaceOrder = () => {
       let placeOrder;
       switch (paymentMethod) {
         case "cod":
+          setLoading(true);
           placeOrder = await axios.post(
             `${backendURL}/api/order/place`,
             dataInfo,
@@ -76,8 +78,10 @@ const PlaceOrder = () => {
           } else {
             toast.warn(placeOrder.data.message);
           }
+          setLoading(false);
           break;
         case "stripe":
+          setLoading(true);
           placeOrder = await axios.post(
             `${backendURL}/api/order/stripe`,
             dataInfo,
@@ -86,10 +90,12 @@ const PlaceOrder = () => {
             }
           );
           if (placeOrder.data.success) {
+            // window.open(placeOrder.data.session_url, "_blank");
             window.location.replace(placeOrder.data.session_url);
           } else {
             toast.error(placeOrder.data.message);
           }
+          setLoading(false);
           break;
         case "rzp":
           // placeOrder = await axios.post(
@@ -106,6 +112,7 @@ const PlaceOrder = () => {
       }
     } catch (error) {
       toast.error(error.message);
+      setLoading(false);
     }
   };
   return (
@@ -252,6 +259,7 @@ const PlaceOrder = () => {
         </div>
         <div className="flex justify-end">
           <input
+            disabled={loading}
             type="submit"
             value="Place Order"
             className=" px-10 py-3 text-sm text-white bg-black cursor-pointer"
