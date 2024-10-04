@@ -4,8 +4,8 @@ import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
 const Login = ({ setToken }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("nana@email.com");
+  const [password, setPassword] = useState("nana_mlbb");
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -42,7 +42,8 @@ const Login = ({ setToken }) => {
             className="px-2 py-1 border-2 rounded mb-2"
             id="email"
             type="email"
-            placeholder="admin@email.com"
+            placeholder="nana@email.com"
+            value={email}
             required
           />
           <label htmlFor="password">Password</label>
@@ -51,9 +52,11 @@ const Login = ({ setToken }) => {
             className="px-2 py-1 border-2 rounded mb-2"
             id="password"
             type="password"
-            placeholder="password"
+            placeholder="nana_mlbb"
+            value={password}
             required
           />
+          <div></div>
           <button className="bg-black text-white py-3 rounded-lg" type="submit">
             Login
           </button>

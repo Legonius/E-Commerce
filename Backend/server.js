@@ -23,6 +23,7 @@ const corsOptions = {
 };
 
 app.use(cors());
+app.options("*", cors());
 
 //Routes end points
 app.use("/api/user", userRouter);
