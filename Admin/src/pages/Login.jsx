@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("nana@email.com");
   const [password, setPassword] = useState("nana_mlbb");
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
+    setLoading(true);
     try {
       e.preventDefault();
       const submit = await axios.post(`${backendUrl}/api/user/admin-login`, {
@@ -26,6 +28,7 @@ const Login = ({ setToken }) => {
       console.log("err:", error.message);
       toast.error("Wrong Credential");
     }
+    setLoading(false);
   };
 
   return (
@@ -56,8 +59,11 @@ const Login = ({ setToken }) => {
             value={password}
             required
           />
-          <div></div>
-          <button className="bg-black text-white py-3 rounded-lg" type="submit">
+          <button
+            disabled={loading}
+            className="bg-black text-white py-3 rounded-lg disabled:opacity-70"
+            type="submit"
+          >
             Login
           </button>
         </form>
