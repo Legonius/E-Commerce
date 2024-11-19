@@ -41,7 +41,7 @@ const addProduct = async (req, res) => {
       subCategory,
     });
 
-    const data = await newProduct.save();
+    await newProduct.save();
 
     res
       .status(201)

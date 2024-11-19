@@ -28,7 +28,7 @@ const deleteImage = async (imgArray) => {
     for (let i = 0; i < imgArray.length; i++) {
       let fileId = imgArray[i];
       if (fileId) {
-        const result = await imagekit.deleteFile(fileId);
+        await imagekit.deleteFile(fileId);
       }
     }
   } catch (error) {
