@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
-import Collection from "./Pages/Collection";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
 import Orders from "./Pages/Orders";
@@ -16,10 +15,11 @@ import SearchBar from "./Components/SearchBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Verify from "./Pages/Verify";
-import { shopContext } from "./Context/ShopContext";
+import Collection from "./Pages/Collection";
 
 const App = () => {
   const location = useLocation();
+  // const LazyCollection = React.lazy(() => import("./Pages/Collection"));
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);

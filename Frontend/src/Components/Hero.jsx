@@ -20,7 +20,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <Link>
+      <Link to={"/collection"}>
         <img
           className="w-full"
           src={"https://ik.imagekit.io/sj5gqfifxi/hero_img.png"}

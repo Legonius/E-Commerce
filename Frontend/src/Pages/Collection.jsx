@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { shopContext } from "../Context/ShopContext";
 import Title from "../Components/Title";
 import ProductItem from "../Components/ProductItem";
 import { assets } from "../assets/assets";
+import ShimmerCard from "../Components/ShimmerCard";
 
 const Collection = () => {
   const { products, searchProduct, showSearch } = useContext(shopContext);
@@ -11,6 +12,7 @@ const Collection = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [sortType, setSortType] = useState("relavent");
+  const dummyyArray = "0123456789abcdefghij";
 
   const selectCategory = (e) => {
     if (categories.includes(e.target.value)) {
@@ -162,7 +164,7 @@ const Collection = () => {
       </div>
 
       {/* {right Side} */}
-      <div>
+      <div className="w-full">
         <div className="flex flex-col gap-4 sm:gap-1 sm:flex-row sm:justify-between">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           <div>
@@ -178,9 +180,13 @@ const Collection = () => {
         </div>
 
         <div className="mt-8 grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {filteredProducts.map((item, index) => (
-            <ProductItem key={index} item={item} />
-          ))}
+          {filteredProducts.length > 0
+            ? filteredProducts.map((item, index) => (
+                <ProductItem key={index} item={item} />
+              ))
+            : dummyyArray
+                .split("")
+                .map((x, idx) => <ShimmerCard key={idx + x} />)}
         </div>
       </div>
     </div>
