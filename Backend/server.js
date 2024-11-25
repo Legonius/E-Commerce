@@ -17,13 +17,13 @@ app.use(urlencoded({ extended: false }));
 
 // Allow your frontend domain
 const corsOptions = {
-  origin: "https://e-commerce-frontend-tau-two.vercel.app",
+  origin: "https://e-commerce-frontend-ruddy.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true,
 };
 
-app.use(cors());
-app.options("*", cors());
+app.use(cors({ origin: "https://e-commerce-frontend-ruddy.vercel.app" }));
+app.options("*", cors(corsOptions));
 
 //Routes end points
 app.use("/api/user", userRouter);
