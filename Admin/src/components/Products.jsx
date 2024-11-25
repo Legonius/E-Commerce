@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { backendUrl } from "../App";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ const Products = ({ item, token, setProducts }) => {
 
   const delProduct = async () => {
     setLoading(true);
+
     const images = [
       item.image[0]?.fileId,
       item.image[1]?.fileId,

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { shopContext } from "../Context/ShopContext";
@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="max-w-full  py-4 flex justify-between items-center dark:bg-white">
+    <div className="max-w-full  py-4 flex justify-between items-center">
       <Link to={"/"}>
         <img className="h-8 md:h-10" src={assets.logo} />
       </Link>
